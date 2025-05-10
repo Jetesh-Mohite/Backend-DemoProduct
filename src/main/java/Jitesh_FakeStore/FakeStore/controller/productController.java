@@ -3,6 +3,8 @@ package Jitesh_FakeStore.FakeStore.controller;
 
 import Jitesh_FakeStore.FakeStore.dto.FakeStoreProductDTO;
 import Jitesh_FakeStore.FakeStore.dto.FakeStoreProductRespDTO;
+import Jitesh_FakeStore.FakeStore.dto.ProductDescDTO;
+import Jitesh_FakeStore.FakeStore.dto.ProductProjection;
 import Jitesh_FakeStore.FakeStore.model.Product;
 import Jitesh_FakeStore.FakeStore.service.ProductService;
 import lombok.Getter;
@@ -16,6 +18,13 @@ import java.util.List;
 public class productController {
     @Autowired
     private ProductService productService;
+
+
+    @GetMapping("demoProduct/projection/{name}")
+    public ResponseEntity<ProductProjection> getProductProjectionByName(@PathVariable("name") String name){
+        ProductProjection projection = productService.getProductProjection(name);
+        return ResponseEntity.ok(projection);
+    }
 
 
     @GetMapping("demoProduct/desc/{description}")

@@ -4,6 +4,7 @@ package Jitesh_FakeStore.FakeStore.service;
 import Jitesh_FakeStore.FakeStore.client.FakeStoreClient;
 import Jitesh_FakeStore.FakeStore.dto.FakeStoreProductDTO;
 import Jitesh_FakeStore.FakeStore.dto.FakeStoreProductRespDTO;
+import Jitesh_FakeStore.FakeStore.dto.ProductProjection;
 import Jitesh_FakeStore.FakeStore.exception.ProductNotFoundException;
 import Jitesh_FakeStore.FakeStore.model.Product;
 import Jitesh_FakeStore.FakeStore.repository.ProductRepository;
@@ -36,10 +37,14 @@ public class ProductService {
     public Product getProduct(int productId){
         Optional<Product> getProduct = productRepository.findById(productId);
         if(getProduct.isEmpty()){
-            throw new ProductNotFoundException("Product with id" + productId + "not found");
+            throw new ProductNotFoundException("Product with id " + productId + " not found");
         }else{
             return  getProduct.get();
         }
+    }
+
+    public ProductProjection getProductProjection(String prodName){
+        return productRepository.findByName(prodName);
     }
 
     public List<Product> getAllProduct(){
